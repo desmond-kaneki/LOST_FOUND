@@ -8,4 +8,4 @@ class item(models.Model):
     item_status_choices = (('L','LOST'),('F','FOUND'))
     item_status = models.CharField(max_length=1,choices=item_status_choices)
     item_user = models.CharField(max_length=128,blank=False,null=False)
-    item_last_seen = models.CharField(max_length=256,blank=False)
+    item_last_place_seen = models.CharField(max_length=256,blank=False)
