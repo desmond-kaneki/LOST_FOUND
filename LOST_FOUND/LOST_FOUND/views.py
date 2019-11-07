@@ -1,6 +1,10 @@
 from django.shortcuts import render
+from item.models import item
 
 def lost(request):
-    return render(request, 'lost.html')
+    it = item.objects
+    return render(request, 'lost.html',{'it':it})
+
 def found(request):
-    return render(request, 'found.html')
+    it = item.objects
+    return render(request, 'found.html',{'it':it})

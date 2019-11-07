@@ -1,54 +1,25 @@
-<html>
-    <head>
-         <!-- Required meta tags -->
-         <meta charset="utf-8">
-         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
- 
-         <!-- Bootstrap CSS -->
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
- 
-    </head>
-    <body>
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Navbar</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                      <span class="navbar-toggler-icon"></span>
-                    </button>
-                  
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                      <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                          <a class="nav-link" href="{%url 'lost'%}">Lost Item <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item active">
-                          <a class="nav-link" href="#">Found Item</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{%url 'new_item'%}">Add Item</a>
-                        </li>
-                      </ul>
-                      <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                      </form>
-                      <ul class="navbar-nav mr auto right">
-                            <li class="nav-item">
-                                    <a class="nav-link" href="#">My Items</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Log Out</a>
-                            </li>
-                      </ul>
-                    </div>
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block content %}
+        <div class="container-fluid mt-4">
+          <div class="row justify-content-left">
+            {% for it in it.all %}
+              {% if it.item_status == 'L' %}
+                <div class="col-auto mb-3">
+                  <div class="card" style="width: 18rem;">
+                    <a href="#">  
+                      <img src="{{ it.item_image.url }}" class="card-img-top" alt="Item Image" height="300">
+                      <div class="card-body">
+                        <h5 class="card-title" align="center">{{ it.item_name }}</h5>
+                        <p class="card-text" id="item-card"><b>Found Near</b> {{ it.item_last_place_seen }}</p>
+                        <p class="card-text" id="item-card"><b>Found On</b> {{ it.item_date }}</p>
+                      </div>
+                    </a>
+                  </div>
                 </div>
-            </nav>
-        <h1>This is Found page</h1>
-    </body>
-</html>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+{% endblock content%}

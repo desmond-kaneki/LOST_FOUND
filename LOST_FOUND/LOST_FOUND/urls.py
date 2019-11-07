@@ -23,4 +23,4 @@ urlpatterns = [
     path('lost/',views.lost,name='lost'),
     path('item/', include('item.urls')),
     path('found/',views.found,name='found'),
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
