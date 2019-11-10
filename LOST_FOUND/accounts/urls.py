@@ -23,4 +23,5 @@ urlpatterns = [
     path('profile/', views.user_profile, name='profile'),
     path('logout/', views.user_logout, name='logout'),
     path('edit/', views.edit_profile, name='edit_profile'),
+    path('my_items/',views.my_items,name='my_items'),
 ]

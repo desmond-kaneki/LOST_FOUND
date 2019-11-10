@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block content %}
+        <div class="container-fluid mt-4">
+          <div class="row justify-content-left">
+            {% for it in it.all %}
+              {% if it.user == user %}
+                <div class="col-auto mb-3">
+                  <div class="card" style="width: 18rem;">
+                    <a href="#">  
+                      <img src="{{ it.item_image.url }}" class="card-img-top" alt="Item Image" height="300">
+                      <div class="card-body">
+                        <h5 class="card-title" align="center">{{ it.item_name }}</h5>
+                        {% if it.item_status == 'L' %}
+                        <p class="card-text" id="item-card"><b>Lost Near</b> {{ it.item_last_place_seen }}</p>
+                        <p class="card-text" id="item-card"><b>Lost On</b> {{ it.item_date }}</p>
+                        {% endif %}
+                        {% if it.item_status == 'F' %}
+                        <p class="card-text" id="item-card"><b>Found Near</b> {{ it.item_last_place_seen }}</p>
+                        <p class="card-text" id="item-card"><b>Found On</b> {{ it.item_date }}</p>
+                        {% endif %}
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+{% endblock content%}

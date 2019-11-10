@@ -5,6 +5,7 @@ from .forms import UserForm, UserProfileForm, LoginForm
 from django.contrib.auth import authenticate, login, logout, get_user
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
+from item.models import item
 # Create your views here.
 
 def signup(request):
@@ -61,3 +62,9 @@ def edit_profile(request):
             return render(request, 'accounts/update_profile.html', {'form':UserProfileForm, 'error':profile_form.errors })
     else:
         return render(request, 'accounts/update_profile.html', {'form':UserProfileForm})
+
+@login_required
+def my_items(request):
+    it = item.objects.order_by('-item_date')
+    user = request.user
+    return render(request, 'accounts/my_item.html',{'it':it,'user':user})
