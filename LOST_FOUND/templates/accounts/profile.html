@@ -1,1 +1,17 @@
 {% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="container col-4">
+    <center><img width="260px" height="200px" src="{{ user.profile.profile_pic.url }}" alt=""></center>
+    <h5 style="text-align: center;">{{ user.first_name}} {{ user.last_name }}</h5>
+    <h5 style="text-align: center;">Email: {{ user.email }}</h5>
+    <h5 style="text-align: center;">Username: {{ user.username }}</h5>
+    {% if user.profile.rollno != '' %}
+      <h5 style="text-align: center;">Roll No.: {{ user.profile.rollno }}</h5>
+    {% endif %}
+    <form action="{% url 'edit_profile' %}">
+      <center><input type="submit" class="btn btn-primary" value="Edit Profile"></center>
+    </form>
+  </div>
+</div>
+{% endblock %}

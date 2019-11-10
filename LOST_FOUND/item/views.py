@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from . import forms
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -8,13 +8,13 @@ from .forms import new_item
 @login_required
 def new_item_view(request):
     if request.method == 'POST':
-        form = new_item(data=request.POST)
+        form = new_item(request.POST, request.FILES)
         if form.is_valid():
             item = form.save(commit=False)
             item.user = request.user
             item.save()
             return redirect('lost')
         else:
-            return render(request,'new_item.html',{'form':new_item,'error':'Form data invalid!! Try again..'})
+            return render(request,'new_item.html',{'form':new_item,'error':form.errors})
     else:
         return render(request,'new_item.html',{'form':new_item})

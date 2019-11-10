@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from item.models import item
 
 def lost(request):
@@ -8,3 +8,6 @@ def lost(request):
 def found(request):
     it = item.objects.order_by('-item_date')
     return render(request, 'found.html',{'it':it})
+
+def home(request):
+    return redirect('lost')

@@ -1,16 +1,30 @@
 {% extends "base.html" %}
+{% load bootstrap3 %}
 {% block content %}
         <div class="container">
-            <div class="jumbotron">
-                <p>Fill The Form</p>
+          {% if error %}
+            {{ error }}
+            <br>
+          {% endif %}
+            <div class="container col-5">
+                <div class="jumbotron">
+                    <h2>Add Item</h2>
+                    <br>
+                    <form method="POST" enctype="multipart/form-data">
+                        {% bootstrap_form form %}
+                        {% csrf_token %}
+                        <script>
+                          $(function() {
+                            $('#id_item_date').daterangepicker({
+                              singleDatePicker: true,
+                              showDropdowns: true,
+                            });
+                          });
+                        </script>
+                        <input type="submit" class="btn btn-primary" value="submit">
+                    </form>
+                </div>
             </div>
         </div>
-        {%load crispy_forms_tags %}
-        <div class="container">
-            <form method="POST">
-                {{form|crispy}}
-                <{% csrf_token %}>
-                <input type="submit" class="btn btn-primary" value="submit">
-            </form>
-        </div>
+
 {% endblock content %}
