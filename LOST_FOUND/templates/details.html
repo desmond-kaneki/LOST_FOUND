@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block content %}
+<div class="container">
+  <div class="container col-8">
+    {% if item.item_status == 'L' %}
+      <h2 style="text-align: center;">Lost Item</h2>
+    {% else %}
+      <h2 style="text-align: center;">Found Item</h2>
+    {% endif %}
+    <center><img width="300" height="400" src="{{ item.item_image.url }}" alt=""></center>
+    <h5 style="text-align: center;">{{ item.item_name }}</h5>
+    <h5 style="text-align: center;">{{ item.item_description }}</h5>
+    {% if item.item_status == 'L' %}
+      <h5 style="text-align: center;">Last Seen: {{ item.item_last_place_seen }}</h5>
+      <h5 style="text-align: center;">Lost On: {{ item.item_date }}</h5>
+      <h5 style="text-align: center;">Belongs to: {{ item.user.first_name }} {{ item.user.last_name }}</h5>
+      <h5 style="text-align: center;">Contact on: {{ item.user.email }}</h5>
+    {% else %}
+      <h5 style="text-align: center;">Found: {{ item.item_last_place_seen }}</h5>
+      <h5 style="text-align: center;">Found On: {{ item.item_date }}</h5>
+      <h5 style="text-align: center;">Currently With: {{ item.user.first_name }} {{ item.user.last_name }}</h5>
+      <h5 style="text-align: center;">Contact on: {{ item.user.email }}</h5>
+    {% endif %}
+  </div>
+</div>
+{% endblock content%}

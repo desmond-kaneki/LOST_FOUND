@@ -8,7 +8,7 @@
               {% if it.item_status == 'F' %}
                 <div class="col-auto mb-3">
                   <div class="card" style="width: 18rem;">
-                    <a href="#">  
+                    <a href="{% url 'details' it.id %}">  
                       <img src="{{ it.item_image.url }}" class="card-img-top" alt="Item Image" height="300">
                       <div class="card-body">
                         <h5 class="card-title" align="center">{{ it.item_name }}</h5>
