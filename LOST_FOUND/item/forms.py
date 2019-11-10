@@ -1,11 +1,7 @@
 from django import forms
+from .models import item
 
-class new_item(forms.Form):
-    name = forms.CharField()
-    image = forms.ImageField()
-    description = forms.CharField(widget=forms.Textarea)
-    date = forms.DateField()
-    status_choices = (('L','LOST'),('F','FOUND'))
-    status = forms.ChoiceField(choices=status_choices)
-    user = forms.CharField()
-    last_seen_place = forms.CharField()
+class new_item(forms.ModelForm):
+    class Meta:
+        model = item
+        fields = ('item_name','item_image','item_description','item_date','item_status','item_last_place_seen')
