@@ -48,3 +48,16 @@ def user_logout(request):
 @login_required
 def user_profile(request):
     return render(request, 'accounts/profile.html',{'user':request.user})
+
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        profile_form = UserProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if profile_form.is_valid():
+            profile = profile_form.save()
+            profile.save()
+            return redirect('profile')
+        else:
+            return render(request, 'accounts/update_profile.html', {'form':UserProfileForm, 'error':profile_form.errors })
+    else:
+        return render(request, 'accounts/update_profile.html', {'form':UserProfileForm})

@@ -24,6 +24,10 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('rollno','profile_pic')
+        labels = {
+                    'rollno':'Roll Number',
+                    'profile_pic':'Profile Picture',
+        }
 
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput())
