@@ -2,3 +2,7 @@ body{
     background: white url("background.jpg");
     padding-top: 50px;
 }
+#id_body{
+  width: 550px;
+  height: 150px;
+}
