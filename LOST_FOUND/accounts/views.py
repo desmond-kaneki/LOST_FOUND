@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from .models import UserProfile
 from .forms import UserForm, UserProfileForm, LoginForm
@@ -68,3 +68,5 @@ def my_items(request):
     it = item.objects.order_by('-item_date')
     user = request.user
     return render(request, 'accounts/my_item.html',{'it':it,'user':user})
+
+
