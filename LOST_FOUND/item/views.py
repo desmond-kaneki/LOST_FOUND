@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from . import forms
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import new_item
-from .models import item
+from .forms import new_item, CommentForm
+from .models import item, comments
 # Create your views here.
 
 @login_required
@@ -22,4 +22,11 @@ def new_item_view(request):
 
 def item_details(request, item_id):
     Item = get_object_or_404(item, pk=item_id)
-    return render(request, 'details.html', {'item':Item})
+    if request.method == 'POST':
+        comment = CommentForm(request.POST)
+        if comment.is_valid():
+            comment = comment.save(commit=False)
+            comment.user = request.user
+            comment.comment_item = Item
+            comment.save()
+    return render(request, 'details.html', {'item':Item, 'comments':Item.item_comments.all(), 'form': CommentForm})
