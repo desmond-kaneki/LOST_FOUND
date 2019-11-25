@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from .forms import new_item, CommentForm
 from .models import item, comments
 from accounts.views import my_items
+from django.db.models import Q
 # Create your views here.
 
 @login_required
