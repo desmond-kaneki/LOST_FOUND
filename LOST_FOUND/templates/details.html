@@ -4,12 +4,12 @@
 
 {% block content %}
 <div class="container">
+    
   <div class="container col-8">
-    {% if item.item_status == 'L' %}
-      <h1 style="text-align: center;">Lost Item</h1>
-    {% else %}
-      <h1 style="text-align: center;">Found Item</h1>
-    {% endif %}
+    {% if item.user == request.user %}
+    <a href="{% url 'delete' item.id %}"><button type="button" id="del_button" class="btn btn-danger" title="This will delete this item forever!!">Delete</button></a>
+  {% endif %}
+
     <center><img width="300" height="400" src="{{ item.item_image.url }}" alt=""></center><br>
     <h4 style="text-align: center;">{{ item.item_name }}</h4>
     <h4 style="text-align: center;">{{ item.item_description }}</h4>
@@ -24,9 +24,7 @@
       <h4 style="text-align: center;">Currently With: {{ item.user.first_name }} {{ item.user.last_name }}</h4>
       <h4 style="text-align: center;">Contact on: {{ item.user.email }}</h4>
     {% endif %}
-    {% if item.user == request.user %}
-      <a href="{% url 'delete' item.id %}"><button type="button" class="btn btn-danger" title="This will delete this item forever!!">Delete</button></a>
-    {% endif %}
+    
 <div class="col-md-10 card mb-4  mt-3 ">
   <h1>Comments</h1>
       <form method="post">

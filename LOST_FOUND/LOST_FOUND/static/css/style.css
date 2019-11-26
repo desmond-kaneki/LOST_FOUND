@@ -6,3 +6,6 @@ body{
   width: 550px;
   height: 150px;
 }
+#del_button{
+  margin-left: 60em;
+}
