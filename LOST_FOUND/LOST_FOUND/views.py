@@ -15,7 +15,13 @@ def lost(request):
 
 def found(request):
     it = item.objects.order_by('-item_date')
-    return render(request, 'found.html',{'it':it})
+    context = {}
+    query = ""
+    if request.GET:
+        query = request.GET['q']
+        it = item.objects.filter(Q(item_name__icontains=query)|Q(item_description__icontains=query)).order_by('-item_date')
+    context['it'] = it
+    return render(request, 'found.html',context)
 
 def home(request):
     return redirect('lost')

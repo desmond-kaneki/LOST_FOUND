@@ -10,6 +10,7 @@
     <a href="{% url 'delete' item.id %}"><button type="button" id="del_button" class="btn btn-danger" title="This will delete this item forever!!">Delete</button></a>
   {% endif %}
 
+    <br>
     <center><img width="300" height="400" src="{{ item.item_image.url }}" alt=""></center><br>
     <h4 style="text-align: center;">{{ item.item_name }}</h4>
     <h4 style="text-align: center;">{{ item.item_description }}</h4>
